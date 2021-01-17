@@ -1,0 +1,8 @@
+{
+  "name": "Workout Builder",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "d226342b"
+}
