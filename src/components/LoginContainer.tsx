@@ -16,7 +16,7 @@ const LoginContainer: React.FC<ContainerProps> = () => {
     }
 
     function displayPage() {
-        if(isAuthenticated()){
+        if(!isAuthenticated()){
             return (<IonCard>
             <IonCardHeader>
               <IonCardTitle>Login</IonCardTitle>
