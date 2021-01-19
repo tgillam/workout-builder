@@ -9,6 +9,6 @@ export const query = (query) => {
           query: query
         }
       }).then((result) => {
-        return result.data.data.getSessions
+        return result.data.data
       });
 }

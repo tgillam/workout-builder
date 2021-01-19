@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './LoginContainer.css';
+// import Cookies from 'js-cookie';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonInput, IonLabel } from '@ionic/react';
 import { isAuthenticated } from '../authentication/authentication'
+import { query } from '../api/api'
+import { Md5 } from "md5-typescript";
 
 
 interface ContainerProps {
@@ -11,12 +14,35 @@ interface ContainerProps {
 const LoginContainer: React.FC<ContainerProps> = () => {
     const [username, setUsername] = useState<string>();
     const [password, setPassword] = useState<string>();
-    const testFunction = () => {
-        console.log(`${username} : ${password}`)
+    const attemptLogin = async () => {
+        //hit getUsers(username: password:) query.
+        //if successful, hit getToken mutation 
+        //if gettoken returns value, add it to cookies
+        //redirect to home page?
+        if(!password) {
+            return
+        }
+        const hashedPassword = Md5.init(password)
+        const result = await query(`query { getUsers(id: "${username}", password: "${hashedPassword}"){ id password }}`)
+        if(result.getUsers.length === 0) {
+            console.log('bad login')
+            return false
+        }
+        console.log('good login')
+        document.cookie = 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+        const mutation = `mutation {
+            createSessions(input: {expiration: "", issued: "", token: ""}){
+              token
+            }
+          }
+          `
+        return true
+        
     }
 
     function displayPage() {
         if(!isAuthenticated()){
+            console.log('in it')
             return (<IonCard>
             <IonCardHeader>
               <IonCardTitle>Login</IonCardTitle>
@@ -32,11 +58,13 @@ const LoginContainer: React.FC<ContainerProps> = () => {
                <IonInput value={password} type="password" onIonChange={e => setPassword(e.detail.value!)} ></IonInput>
             </IonItem>
             <div className="button">
-               <IonButton color="primary" shape="round" onClick={ testFunction } >Login</IonButton>
+               <IonButton color="primary" shape="round" onClick={ attemptLogin } >Login</IonButton>
             </div>
           </IonCardContent>
           </IonCard>)
         }
+        console.log('in it2')
+
     }
 
     
