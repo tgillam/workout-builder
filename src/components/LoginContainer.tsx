@@ -5,6 +5,7 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonIte
 import { getAccessToken } from '../authentication/authentication'
 import { query } from '../api/api'
 import { Md5 } from "md5-typescript";
+import { useHistory } from 'react-router-dom'
 
 
 interface ContainerProps {
@@ -12,6 +13,7 @@ interface ContainerProps {
 }
 
 const LoginContainer: React.FC<ContainerProps> = () => {
+    const history = useHistory();
     const [username, setUsername] = useState<string>();
     const [password, setPassword] = useState<string>();
     const attemptLogin = async () => {
@@ -29,18 +31,20 @@ const LoginContainer: React.FC<ContainerProps> = () => {
             return false
         }
         console.log('good login')
-        document.cookie = 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+        document.cookie = 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRnaWxsYW05NkBnbWFpbC5jb20iLCJuYW1lIjoiVHlsZXIiLCJleHBpcmF0aW9uIjoxNjExODg2NTgwMDAwfQ.a-W-9NrdCh2peq7OlDMMW9C_a7QS3vaDsJUv0KnhIck'
         // const mutation = `mutation {
         //     createSessions(input: {expiration: "", issued: "", token: ""}){
         //       token
         //     }
         //   }
         //   `
+        history.push(`/page/home`);
         return true
         
     }
 
     function displayPage() {
+        console.log(getAccessToken())
         if(!getAccessToken()){
             return (<IonCard>
             <IonCardHeader>

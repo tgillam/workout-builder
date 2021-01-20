@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 import ExploreContainer from '../components/ExploreContainer';
 import './Page.css';
+import Header from '../components/Header';
 
 const Page: React.FC = () => {
 
@@ -10,15 +11,7 @@ const Page: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
+      <Header name={name}/>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>

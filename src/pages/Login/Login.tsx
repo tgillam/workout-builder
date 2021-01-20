@@ -1,6 +1,7 @@
 import React from "react";
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import LoginContainer from '../../components/LoginContainer'
+import Header from "../../components/Header"
 
 
 
@@ -8,16 +9,7 @@ const Login: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      
-
+      <Header name="Login"/>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
