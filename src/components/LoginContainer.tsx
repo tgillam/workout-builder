@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './LoginContainer.css';
 // import Cookies from 'js-cookie';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonInput, IonLabel } from '@ionic/react';
-import { isAuthenticated } from '../authentication/authentication'
+import { getAccessToken } from '../authentication/authentication'
 import { query } from '../api/api'
 import { Md5 } from "md5-typescript";
 
@@ -41,7 +41,7 @@ const LoginContainer: React.FC<ContainerProps> = () => {
     }
 
     function displayPage() {
-        if(!isAuthenticated()){
+        if(!getAccessToken()){
             return (<IonCard>
             <IonCardHeader>
               <IonCardTitle>Login</IonCardTitle>
