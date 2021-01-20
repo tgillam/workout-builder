@@ -30,19 +30,18 @@ const LoginContainer: React.FC<ContainerProps> = () => {
         }
         console.log('good login')
         document.cookie = 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-        const mutation = `mutation {
-            createSessions(input: {expiration: "", issued: "", token: ""}){
-              token
-            }
-          }
-          `
+        // const mutation = `mutation {
+        //     createSessions(input: {expiration: "", issued: "", token: ""}){
+        //       token
+        //     }
+        //   }
+        //   `
         return true
         
     }
 
     function displayPage() {
         if(!isAuthenticated()){
-            console.log('in it')
             return (<IonCard>
             <IonCardHeader>
               <IonCardTitle>Login</IonCardTitle>
@@ -63,7 +62,6 @@ const LoginContainer: React.FC<ContainerProps> = () => {
           </IonCardContent>
           </IonCard>)
         }
-        console.log('in it2')
 
     }
 
