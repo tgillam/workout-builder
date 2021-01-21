@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LoginContainer.css';
 // import Cookies from 'js-cookie';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonInput, IonLabel } from '@ionic/react';
+import { IonSpinner, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonItem, IonInput, IonLabel } from '@ionic/react';
 import { getAccessToken } from '../authentication/authentication'
 import { query } from '../api/api'
 import { Md5 } from "md5-typescript";
@@ -16,11 +16,8 @@ const LoginContainer: React.FC<ContainerProps> = () => {
     const history = useHistory();
     const [username, setUsername] = useState<string>();
     const [password, setPassword] = useState<string>();
+  
     const attemptLogin = async () => {
-        //hit getUsers(username: password:) query.
-        //if successful, hit getToken mutation 
-        //if gettoken returns value, add it to cookies
-        //redirect to home page?
         if(!password) {
             return
         }
@@ -32,15 +29,8 @@ const LoginContainer: React.FC<ContainerProps> = () => {
         }
         console.log('good login')
         document.cookie = 'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRnaWxsYW05NkBnbWFpbC5jb20iLCJuYW1lIjoiVHlsZXIiLCJleHBpcmF0aW9uIjoxNjExODg2NTgwMDAwfQ.a-W-9NrdCh2peq7OlDMMW9C_a7QS3vaDsJUv0KnhIck'
-        // const mutation = `mutation {
-        //     createSessions(input: {expiration: "", issued: "", token: ""}){
-        //       token
-        //     }
-        //   }
-        //   `
         history.push(`/page/home`);
-        return true
-        
+        return true     
     }
 
     function displayPage() {
@@ -53,11 +43,11 @@ const LoginContainer: React.FC<ContainerProps> = () => {
       
           <IonCardContent>
             <IonItem>
-              <IonLabel>Username: </IonLabel>
+              <IonLabel position="stacked">Username: </IonLabel>
                <IonInput value={username} onIonChange={e => setUsername(e.detail.value!)}></IonInput>
             </IonItem>
             <IonItem>
-              <IonLabel>Password: </IonLabel>
+              <IonLabel position="stacked">Password: </IonLabel>
                <IonInput value={password} type="password" onIonChange={e => setPassword(e.detail.value!)} ></IonInput>
             </IonItem>
             <div className="button">
