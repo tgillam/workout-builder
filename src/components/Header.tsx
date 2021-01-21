@@ -28,7 +28,7 @@ const Header: React.FC<ContainerProps> = ({ name }) => {
       </IonButtons>
       <IonTitle>{name}</IonTitle>
       <div className="header">
-        <IonButton color="primary" shape="round" onClick={ authenticate }>{ getAccessToken() ? "Logout" : "Login"}</IonButton>
+        <IonButton size="small" color="primary" shape="round" onClick={ authenticate }>{ getAccessToken() ? "Logout" : "Login"}</IonButton>
       </div>
     </IonToolbar>
   </IonHeader>
